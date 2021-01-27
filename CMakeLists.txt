@@ -18,6 +18,7 @@ add_executable(logger main.cpp)
 add_test(test1 logger)
 
 target_link_libraries(logger PRIVATE Catch2::Catch2)
+target_include_directories(logger PRIVATE Catch2::Catch2)
 
 set_target_properties(logger PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 
