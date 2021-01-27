@@ -1,24 +1,19 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required(VERSION 3.10)
+project(jenkinsexample)
 
-if(DEFINED ENV{VCPKG_ROOT} )
-  set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-      CACHE STRING "")
-endif()
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
-project (ft VERSION 1.1.1)
+set(CMAKE_CXX_STANDARD 11)
 
-find_package(Catch2 REQUIRED)
+add_executable(jenkinsexample main.cpp helloWorld.cpp helloWorld.h)
 
+#find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
-AUX_SOURCE_DIRECTORY(. A)
+#target_compile_definitions(jenkinsexample PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+#target_link_libraries(jenkinsexample PRIVATE Qt5::Core Qt5::Widgets)
 
-enable_testing()
-add_executable(logger main.cpp)
-
-add_test(test1 logger)
-
-target_link_libraries(logger PRIVATE Catch2::Catch2)
-target_include_directories(logger PRIVATE Catch2::Catch2)
-
-set_target_properties(logger PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+include(CTest)
+add_subdirectory(test)
 

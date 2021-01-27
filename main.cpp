@@ -1,12 +1,13 @@
 
-#include <iostream>
+#include "helloWorld.h"
 
-#include "catch2/catch.hpp"
+int main(int argc, char **argv ) {
+    
 
-using namespace std;
+    HelloWorld helloWorld;
+    std::string hello = helloWorld.helloWorld();
 
-int main(void)
-{
-    cout << "hello.world" << endl;
+   
+
     return 0;
 }
