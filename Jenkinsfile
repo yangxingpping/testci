@@ -6,6 +6,7 @@ pipeline {
 	}
 
 	parameters {
+        booleanParam name: 'CHECK_OUT', defaultValue: true, description: 'Check Out?'
 		booleanParam name: 'RUN_TESTS', defaultValue: true, description: 'Run Tests?'
 		booleanParam name: 'RUN_ANALYSIS', defaultValue: true, description: 'Run Static Code Analysis?'
 		booleanParam name: 'DEPLOY', defaultValue: true, description: 'Deploy Artifacts?'
@@ -14,14 +15,17 @@ pipeline {
 	stages {
 	    
 	    stage("check out"){
+            when {
+                environment name: 'CHECK_OUT', value: 'true'
+            }
             steps{
-                git  credentialsId: 'f63122c7-9406-4a1f-beed-e8f9ffa07036', url: 'git@github.com:yangxingpping/testci.git'
+                git  credentialsId: 'f63122c7-9406-4a1f-beed-e8f9ffa07036', url: 'https://github.com/yangxingpping/testci.git'
             }
         }
 	    
         stage('Build') {
             steps {
-                cmake arguments: '-DCMAKE_TOOLCHAIN_FILE=/root/vcpkg/scripts/buildsystems/vcpkg.cmake', installation: 'InSearchPath'
+                cmake arguments: '', installation: 'InSearchPath'
                 cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
             }
         }
