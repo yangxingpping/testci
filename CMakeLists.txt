@@ -12,7 +12,10 @@ find_package(Catch2 REQUIRED)
 
 AUX_SOURCE_DIRECTORY(. A)
 
+enable_testing()
 add_executable(logger main.cpp)
+
+add_test(test1 logger)
 
 target_link_libraries(logger PRIVATE Catch2::Catch2)
 
