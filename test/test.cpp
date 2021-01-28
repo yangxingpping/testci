@@ -8,3 +8,9 @@ TEST_CASE("Test heloWorld", "[test]") {
 
     REQUIRE("Hello World!" == helloWorld.helloWorld());
 }
+
+TEST_CASE("Test fffffff", "[fffffff]") {
+    HelloWorld helloWorld;
+
+    REQUIRE("Hello World!" == helloWorld.helloWorld());
+}
